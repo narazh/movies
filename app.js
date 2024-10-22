@@ -1,8 +1,7 @@
 
-
 const url = 'https://api.sampleapis.com/movies/'
 
-const genres = ['animation', 'classic', 'comedy', 'drama', 'horror', 'family', 'mystery', 'scifi-fantasy', 'western']
+const genres = ['animation', 'classic', 'comedy', 'drama', 'horror' , 'family' , 'mystery' , 'scifi-fantasy' , 'western']
 // DOM
 const div = document.getElementById('buttons')
 const movies = document.getElementById('movies')
@@ -29,7 +28,7 @@ buttons.forEach((btn) => {
                     return `
                 <div class="xl:w-1/4 md:w-1/2 p-4">
                     <div class="bg-gray-100 p-6 rounded-lg">
-                        <img class="h-80 rounded w-full object-cover object-center mb-6"
+                        <img class="h-40 rounded w-full object-cover object-center mb-6"
                             src="${film.posterURL}" alt="content">
                         <h2 class="text-lg text-gray-900 font-medium title-font mb-4">${film.title}</h2>
                         <p class="leading-relaxed text-base">
@@ -41,3 +40,23 @@ buttons.forEach((btn) => {
             })
     })
 })
+
+
+fetch(url + 'animation').then(response => response.json()).then(films => {
+    movies.innerHTML = films.map(film => {
+        return `  
+        <div class="xl:w-1/4 md:w-1/2 p-4">  
+            <div class="bg-gray-100 p-6 rounded-lg">  
+                <img class="h-90 rounded w-full object-cover object-center mb-6"  
+                    src="${film.posterURL}" alt="content">  
+                <h2 class="text-lg text-gray-900 font-medium title-font mb-4">${film.title}</h2>  
+                <p class="leading-relaxed text-base">  
+                <a href="https://www.imdb.com/title/${film.imdbId}" target="_blank">${film.imdbId} </a>  
+                </p>  
+            </div>  
+        </div>`;
+    }
+    ).join('');
+}
+);
+
